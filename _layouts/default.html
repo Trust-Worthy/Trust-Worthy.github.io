@@ -1,37 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ page.title }} | {{ site.title }}</title>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
-  
-  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/default.css" />
-  
-  {% if page.custom_css %}
-    <link rel="stylesheet" href="{{ site.baseurl }}{{ page.custom_css }}">
-  {% endif %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: site.title }}</title>
+    
+    <!-- Base styles for all pages -->
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css">
+    
+    <!-- Optional page-specific CSS -->
+    {% if page.custom_css %}
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/{{ page.custom_css }}.css">
+    {% endif %}
 </head>
 <body>
+    {% include header.html %}
 
-  {% include nav.html %}
+    <main class="app-grid">
+        <!-- Sidebar: Show on home and blog pages only -->
+        {% if page.url == '/' or page.url contains '/blog' %}
+        <aside class="timeline-panel">
+            <div class="timeline-header">// TRANSMISSION_LOG</div>
+            {% for post in site.posts limit:15 %}
+            <article class="timeline-item">
+                <a href="{{ post.url | relative_url }}">
+                    <span class="timeline-date">{{ post.date | date: "%Y.%m.%d" }}</span>
+                    <h3 class="timeline-title">{{ post.title }}</h3>
+                </a>
+            </article>
+            {% endfor %}
+        </aside>
+        {% endif %}
 
-  {{ content }}
+        <!-- Main content area -->
+        <section class="content-panel">
+            {{ content }}
+        </section>
+    </main>
 
-  {% include footer.html %}
+    {% include footer.html %}
 
-  {% if page.custom_js %}
-    <script src="{{ site.baseurl }}{{ page.custom_js }}"></script>
-  {% endif %}
-
-  <script>
-    // Global Theme Toggle Logic (move this from individual pages to here)
-    const toggle = document.querySelector('.theme-toggle');
-    if(toggle) {
-        toggle.addEventListener('click', () => {
-            document.body.classList.toggle('light');
-        });
-    }
-  </script>
+    <!-- Optional page-specific JS -->
+    {% if page.custom_js %}
+    <script src="{{ site.baseurl }}/assets/js/{{ page.custom_js }}.js"></script>
+    {% endif %}
 </body>
 </html>
