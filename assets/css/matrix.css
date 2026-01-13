@@ -1,0 +1,56 @@
+/* Matrix-specific styles for homepage */
+
+.matrix-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    background: transparent;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.matrix-container canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    image-rendering: crisp-edges;
+}
+
+/* Ensure home container has proper grid */
+.home-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    padding: 4rem;
+    height: 100%;
+    align-items: start;
+}
+
+/* Bio section styling */
+.bio-section {
+    max-width: 600px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 1024px) {
+    .home-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .matrix-container {
+        min-height: 400px;
+        max-height: 500px;
+    }
+}
+
+@media (max-width: 600px) {
+    .home-container {
+        padding: 2rem 1rem;
+    }
+    
+    .matrix-container {
+        min-height: 300px;
+    }
+}
