@@ -3,8 +3,12 @@ email: info.prelude203@simplelogin.fr
 description: >-
   Personal site and blog by Jonathan Bateman.
 baseurl: # <--- REPLACE THIS with your GitHub Repo name (e.g., /my-website)
-url: "https://Trust-Worthy.github.io" # <--- Replace with your GitHub URL
+url: "https://jonathanmbateman.com" # <--- Replace with your GitHub URL
 github_username: Trust-Worthy
+author: 
+  name: Jonathan Bateman
+  email: info.prelude203@simplelogin.fr
 
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag

@@ -8,6 +8,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@1,400&display=swap');
 
 :root {
+    /* DEFAULT (LIGHT) - Swiss/Laboratory Look */
     /* Colors */
     --bg-color: #F4F6F8;
     --panel-bg: #FFFFFF;
@@ -25,6 +26,35 @@
     /* Layout */
     --sidebar-width: 350px;
     --header-height: 60px;
+}
+
+/* DARK MODE OVERRIDES - Cyber/Matrix Look */
+[data-theme="dark"] {
+    --bg-color: #020406;       /* Deepest Black */
+    --panel-bg: #0B1120;       /* Dark Navy Panel */
+    --content-bg: #0F172A;     /* Slate Content */
+    --text-primary: #E2E8F0;   /* Bright White/Grey */
+    --text-secondary: #94A3B8; /* Muted Grey */
+    --accent-color: #00F3FF;   /* Neon Cyan (Glowing) */
+    --border-color: #1E293B;   /* Dark Borders */
+    --code-bg: #1E293B;
+}
+
+/* Smooth transition for theme switching */
+body, .site-header, .timeline-panel, .content-panel, .contact-card, a {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+#theme-toggle:hover {
+    color: var(--accent-color) !important;
+}
+
+#theme-toggle svg {
+    transition: transform 0.5s ease;
+}
+
+#theme-toggle:hover svg {
+    transform: rotate(45deg); /* Cool spin effect on hover */
 }
 
 /* --- 2. RESET & BASE --- */
@@ -155,7 +185,8 @@ a:hover {
 }
 
 .timeline-item:hover {
-    background-color: var(--content-bg);
+    /* background-color: var(--content-bg); */
+    background-color: var(--code-bg);
 }
 
 .timeline-date {
@@ -218,7 +249,8 @@ a:hover {
     font-size: 1.15rem;
     line-height: 1.7;
     margin-bottom: 1.5rem;
-    color: #334155;
+    color: var(--text-secondary);
+    /* color: #334155; */
 }
 
 .prose a {
@@ -295,7 +327,7 @@ a:hover {
     font-size: 1.15rem;
     line-height: 1.7;
     margin-bottom: 1.5rem;
-    color: #334155;
+    color: var(--text-secondary);
 }
 
 .matrix-container {
