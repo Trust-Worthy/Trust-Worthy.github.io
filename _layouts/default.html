@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% seo %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: site.title }}</title>
     
     <!-- Base styles for all pages -->
     <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css">
-    
+    <!--RSS FEED-->
+    <link type="application/atom+xml" rel="alternate" href="{{ site.url }}/feed.xml" title="{{ site.title }}" />
     <!-- Optional page-specific CSS -->
     {% if page.custom_css %}
     <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/{{ page.custom_css }}.css">
@@ -29,6 +31,28 @@
                 </a>
             </article>
             {% endfor %}
+
+            <div class="newsletter-box" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                <h4 style="font-family: var(--font-head); font-size: 0.8rem; letter-spacing: 0.1em; margin-bottom: 0.5rem; text-transform: uppercase; color: var(--text-secondary);">
+                    Join the Network
+                </h4>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5;">
+                    Signal, no noise. Weekly transmissions on crypto & systems.
+                </p>
+
+                <form action="https://buttondown.email/api/emails/embed-subscribe/YOUR_USERNAME" method="post" target="popupwindow" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <input type="email" name="email" placeholder="email@address.com" 
+                        style="padding: 0.6rem; border: 1px solid var(--border-color); background: var(--panel-bg); color: var(--text-primary); font-family: var(--font-body); font-size: 0.9rem; border-radius: 4px;">
+                    
+                    <button type="submit" 
+                            style="background: var(--text-primary); color: var(--panel-bg); border: none; padding: 0.6rem; font-family: var(--font-head); font-size: 0.8rem; letter-spacing: 0.05em; cursor: pointer; border-radius: 4px; transition: background 0.2s;">
+                        INITIALIZE_HANDSHAKE
+                    </button>
+                </form>
+                <p style="font-size: 0.7rem; color: var(--text-secondary); margin-top: 0.5rem; opacity: 0.7;">
+                    <a href="{{ site.url }}/feed.xml" target="_blank" style="text-decoration: underline;">RSS Feed</a> available.
+                </p>
+            </div>
         </aside>
         {% endif %}
 
@@ -44,5 +68,39 @@
     {% if page.custom_js %}
     <script src="{{ site.baseurl }}/assets/js/{{ page.custom_js }}.js"></script>
     {% endif %}
+    <script>
+    // Theme Logic
+    const toggleBtn = document.getElementById('theme-toggle');
+    const sunIcon = document.querySelector('.sun-icon');
+    const moonIcon = document.querySelector('.moon-icon');
+    
+    // Check local storage or system preference
+    const currentTheme = localStorage.getItem('theme') || 
+                         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    
+    // Apply theme on load
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    updateIcons(currentTheme);
+
+    toggleBtn.addEventListener('click', () => {
+        let theme = document.documentElement.getAttribute('data-theme');
+        let newTheme = theme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateIcons(newTheme);
+    });
+
+    function updateIcons(theme) {
+        if (theme === 'dark') {
+            sunIcon.style.display = 'none';
+            moonIcon.style.display = 'block';
+            moonIcon.style.color = 'var(--accent-color)'; // Make moon glow cyan
+        } else {
+            sunIcon.style.display = 'block';
+            moonIcon.style.display = 'none';
+        }
+    }
+</script>
 </body>
 </html>
