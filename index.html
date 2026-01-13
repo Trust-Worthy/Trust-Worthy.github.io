@@ -1,54 +1,20 @@
 ---
 layout: default
 title: Home
-custom_css: /assets/css/index.css
-custom_js: /assets/js/index.js
+custom_css: matrix
+custom_js: matrix
 ---
 
-<div class="container">
-  <div class="bio">
-    <h1>Hi, I'm Jonathan</h1>
-    <p class="cipher-text">Systems are only as strong as the trust they uphold.</p>
-    <p>I originally chose the name Trust-Worthy because it was available. 
-      Over time, it evolved into a philosophy — trust isn't optional in secure systems; it's foundational. 
-      As I deepened my work in cryptography, cybersecurity, and interpretable AI, 
-      the name came to reflect a mission: building systems that defend, rather than exploit, their users.</p>
-    <p>I focus on privacy-preserving, security-conscious, and sustainable software design. 
-      My goal is to create tools that are ethically aligned, technically sound, and resilient in a hostile world. 
-      Code is power — but trust is the vector.</p>
-  </div>
-  <div class="matrix-box">
-    <canvas id="matrixCanvas" class="matrix-canvas"></canvas>
-  </div>
+<div class="home-container">
+    <div class="bio-section">
+        <h1 class="bio-title">Hi, I'm Jonathan</h1>
+        <p class="cipher-text">Systems are only as strong as the trust they uphold.</p>
+        <p>I originally chose the name Trust-Worthy because it was available. Over time, it evolved into a philosophy — trust isn't optional in secure systems; it's foundational.</p>
+        <p>I focus on privacy-preserving, security-conscious, and sustainable software design. My goal is to create tools that are ethically aligned, technically sound, and resilient in a hostile world.</p>
+    </div>
+    
+    <!-- Matrix canvas container -->
+    <div class="matrix-container">
+        <canvas id="matrixCanvas"></canvas>
+    </div>
 </div>
-
-<!-- <section class="blog-preview" id="blog">
-  <h2>In the Midst</h2>
-  <div class="posts" id="posts">
-    {% for post in site.posts limit:3 %}
-      <article class="post-preview">
-        <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-        <p class="post-date">{{ post.date | date: "%B %-d, %Y" }}</p>
-        <p class="post-excerpt">{{ post.excerpt }}</p>
-      </article>
-    {% endfor %}
-  </div>
- 
-  <a class="view-all" href="/blog.html">View All Posts →</a>
-</section> -->
-
-<section class="index-preview-section" id="blog">
-  <h2 class="index-preview-heading">Recent Blog Posts</h2>
-  <div class="index-preview-list">
-    {% for post in site.posts limit:3 %}
-      <article class="index-preview-card">
-        <h3 class="index-preview-title">
-          <a href="{{ post.url }}">{{ post.title }}</a>
-        </h3>
-        <p class="index-preview-date">{{ post.date | date: "%B %-d, %Y" }}</p>
-        <p class="index-preview-excerpt">{{ post.excerpt }}</p>
-      </article>
-    {% endfor %}
-  </div>
-  <a class="index-preview-link" href="/blog.html">View All Posts →</a>
-</section>

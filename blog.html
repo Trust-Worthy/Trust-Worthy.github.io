@@ -1,21 +1,23 @@
 ---
 layout: default
 title: In the Midst
-custom_css: /assets/css/blog.css
 ---
 
-<h1>In the midst</h1>
+<div class="prose">
+    <h1>In the Midst</h1>
+    <p class="blog-intro">
+        Thoughts on cryptography, security, AI interpretability, and building systems worthy of trust.
+    </p>
 
-<!-- 
-TO-DO
-Add another paragraph explaining what the blog is about-->
-
-<ul class="blog-list">
-  {% for post in site.posts %}
-    <li>
-      <a href="{{ post.url }}">{{ post.title }}</a>
-      <small>{{ post.date | date: "%B %d, %Y" }}</small>
-      <p>{{ post.excerpt }}</p>
-    </li>
-  {% endfor %}
-</ul>
+    <div class="blog-list">
+        {% for post in site.posts %}
+        <article class="blog-list-item">
+            <time class="post-date">{{ post.date | date: "%Y.%m.%d" }}</time>
+            <h2 class="post-title">
+                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            </h2>
+            <p class="post-excerpt">{{ post.excerpt }}</p>
+        </article>
+        {% endfor %}
+    </div>
+</div>

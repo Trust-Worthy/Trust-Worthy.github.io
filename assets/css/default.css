@@ -1,63 +1,181 @@
+/* --- 1. FONTS & VARIABLES --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@1,400&display=swap'); /* For Greek Script */
+
 :root {
-    --accent-color: #89CFF0;
-    --bg-dark: #000000;
-    --bg-light: #f6f6f6;
-    --text-light: #F6F6F6;
-    --text-dark: #111;
+    --bg-color: #F4F6F8;       /* PI Light Grey/Blue */
+    --panel-bg: #FFFFFF;       /* White panels */
+    --text-primary: #0F172A;   /* Slate Dark */
+    --text-secondary: #64748B; /* Slate Light */
+    --accent-color: #00A3C4;   /* Matrix Teal */
+    --border-color: #E2E8F0;   /* Subtle Grey */
+    
+    --font-head: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-greek: 'Noto Serif Display', serif; /* The contrast font */
+    
+    --sidebar-width: 350px;
 }
+
+/* --- 2. RESET & BASE --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-    margin: 0;
-    background-color: var(--bg-dark);
-    color: var(--text-light);
-    font-family: 'EB Garamond', serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    font-size: 18px;
-    transition: background-color 0.3s, color 0.3s;
+    overflow: hidden; /* We scroll inside divs, not the body */
 }
-body.light {
-    background-color: var(--bg-light);
-    color: var(--text-dark);
-}
-nav {
+
+a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+a:hover { opacity: 0.7; }
+
+/* --- 3. HEADER (The Identity Bar) --- */
+.site-header {
+    height: 60px;
+    flex-shrink: 0;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 2.5rem;
-    background-color: rgba(0,0,0,0.9);
-    border-bottom: 1px solid var(--accent-color);
-    font-size: 1.2rem;
+    justify-content: space-between;
+    padding: 0 2rem;
+    background: var(--panel-bg);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 10;
 }
-body.light nav {
-    background-color: rgba(246,246,246,0.9);
-}
-nav .logo {
-    font-size: 1.6rem;
-    color: var(--accent-color);
-    font-weight: 600;
-}
-nav ul {
-    list-style: none;
+
+.brand-identity {
+    font-family: var(--font-head);
+    font-weight: 500;
+    font-size: 1.15rem;
+    letter-spacing: -0.02em;
     display: flex;
-    gap: 1.5rem;
-    margin: 0;
-    padding: 0;
+    align-items: center;
+    gap: 8px;
 }
-nav a, .theme-toggle {
-    text-decoration: none;
-    color: var(--text-light);
-    background: none;
-    border: none;
+
+.greek-script {
+    font-family: var(--font-greek);
+    font-style: italic;
+    color: var(--accent-color);
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+}
+
+.nav-links a.active {
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--accent-color);
+}
+
+/* --- 4. SPLIT LAYOUT --- */
+.app-grid {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 1fr;
+    height: calc(100vh - 60px);
+}
+
+/* LEFT: Timeline Sidebar */
+.timeline-panel {
+    background: var(--panel-bg);
+    border-right: 1px solid var(--border-color);
+    overflow-y: auto;
+    padding: 2rem;
+}
+
+.timeline-header {
+    font-family: var(--font-head);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.1em;
+}
+
+.timeline-item {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border-color);
     cursor: pointer;
+}
+
+.timeline-date {
+    display: block;
+    font-family: var(--font-head); /* Technical font for dates */
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.4rem;
+}
+
+.timeline-title {
     font-size: 1.1rem;
     font-weight: 500;
-    transition: color 0.3s ease;
+    line-height: 1.3;
 }
-body.light nav a,
-body.light .theme-toggle {
-    color: var(--text-dark);
+
+/* RIGHT: Content Box */
+.content-panel {
+    position: relative;
+    background: #F8FAFC; /* Slightly different from sidebar */
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
 }
-nav a:hover, .theme-toggle:hover {
-    color: var(--accent-color);
+
+/* --- 5. CANVAS CONTAINERS --- */
+/* Invisible Box logic */
+.canvas-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- 6. TEXT CONTENT STYLING --- */
+.prose {
+    max-width: 800px;
+    padding: 4rem;
+    margin: 0 auto;
+}
+
+.prose h1 {
+    font-family: var(--font-head);
+    font-size: 3rem;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    letter-spacing: -0.03em;
+}
+
+.prose p {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    color: #334155;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+    .app-grid { grid-template-columns: 1fr; }
+    .timeline-panel { display: none; /* Hide timeline on mobile home, active on blog index if needed */ }
+    .nav-links { gap: 1rem; }
 }

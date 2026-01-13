@@ -1,19 +1,22 @@
 ---
 layout: default
 title: About
-custom_css: /assets/css/about.css
-custom_js: /assets/js/about.js
+custom_css: chess
+custom_js: chess
 ---
 
-<div class="container">
-  <div class="bio">
-    <h1>About</h1>
-    <p>I've always viewed technology like a chessboard — strategy, creativity, defense, and foresight. My journey began with simple scripts and turned into an obsession with cryptography, digital security, and the philosophy of systems.</p>
-    <p>Each piece on the board represents a passion: development, anthropology, mathematics, language, encryption.</p>
-    <p>Scroll down as the game unfolds...</p>
+<div class="prose">
+    <h1>About the Game</h1>
+    <p>
+        I view technology like a chessboard—strategy, creativity, defense, and foresight.
+        Below is the Karpov vs Kasparov (1985) game, running in real-time.
+    </p>
+    
+    <div class="chess-container">
+        <canvas id="chessCanvas" width="400" height="400"></canvas>
     </div>
-    <div class="chessboard" id="chessboard">
-      <!-- Placeholder: real animation logic comes next -->
-      <canvas id="chessCanvas" width="400" height="400"></canvas>
-  </div>
+    
+    <p>
+        Each piece represents a passion: development, anthropology, mathematics, language, encryption.
+    </p>
 </div>
