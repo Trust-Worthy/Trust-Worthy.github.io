@@ -3,34 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ page.title }} | J.M.B.</title>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/css/default.css" />
-
-  <!-- Optional per-page CSS-->
+  <title>{{ page.title }} | {{ site.title }}</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/default.css" />
+  
   {% if page.custom_css %}
-    <link rel="stylesheet" href="{{ page.custom_css }}">
+    <link rel="stylesheet" href="{{ site.baseurl }}{{ page.custom_css }}">
   {% endif %}
 </head>
 <body>
-  <nav>
-    <div class="logo">J.M.B.</div>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/about.html">About</a></li>
-      <li><a href="/contact.html">Contact</a></li>
-      <li><a href="/blog.html">Blog</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><button class="theme-toggle" aria-label="Toggle theme">🌓</button></li>
-    </ul>
-  </nav>
+
+  {% include nav.html %}
 
   {{ content }}
 
   {% include footer.html %}
-   <!-- Optional per-page JS -->
+
   {% if page.custom_js %}
-    <script type="module" src="{{ page.custom_js }}"></script>
+    <script src="{{ site.baseurl }}{{ page.custom_js }}"></script>
   {% endif %}
+
+  <script>
+    // Global Theme Toggle Logic (move this from individual pages to here)
+    const toggle = document.querySelector('.theme-toggle');
+    if(toggle) {
+        toggle.addEventListener('click', () => {
+            document.body.classList.toggle('light');
+        });
+    }
+  </script>
 </body>
 </html>
